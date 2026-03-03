@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLOG | Team DN</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+<style>
+    .blog-container { padding: 120px 10% 50px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+    .post-card { 
+        background: #1e1e1e; border-radius: 15px; overflow: hidden; 
+        border-left: 5px solid var(--blue); transition: 0.4s;
+    }
+    .post-card:hover { transform: translateY(-10px); border-left-color: var(--red); }
+    .post-content { padding: 20px; }
+    .tag { background: var(--green-dark); padding: 5px 10px; font-size: 0.7rem; border-radius: 5px; }
+    .post-title { margin-top: 15px; color: var(--blue); }
+</style>
+<header>
+    <div class="logo"><img src="Logo_OVTT.jpg" alt="Logo"></div>
+    <nav>
+        <a href="index.html">Accueil</a>
+        <a href="equipe.html">L'Équipe</a>
+        <a href="blog.html">Actualités</a>
+        <a href="a-propos.html">À Propos</a>
+    </nav>
+</header>
+
+<div class="blog-container">
+    <div class="post-card" data-aos="fade-right">
+        <div class="post-content">
+            <span class="tag">Résultat Compétition</span>
+            <h3 class="post-title">Podium à la Coupe de France</h3>
+            <p>Une performance exceptionnelle de nos coureurs ce weekend...</p>
+            <br><small>01 Mars 2024</small>
+        </div>
+    </div>
+    </div>
+
+    <footer>
+        <div class="social-dots">
+            <span class="dot" style="background:var(--blue)"></span>
+            <span class="dot" style="background:var(--red)"></span>
+            <span class="dot" style="background:var(--green-light)"></span>
+        </div>
+        <p>&copy; 2024 OBJECTIF VTT LILLEBONNE - Design DN</p>
+    </footer>

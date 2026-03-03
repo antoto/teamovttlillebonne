@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'Équipe - Objectif VTT Lillebonne | Team DN</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* --- VARIABLES ET STYLES DE BASE (Identiques à l'accueil) --- */
+        :root {
+            --blue: #00acda; --red: #ff0000; --green-light: #8ab432; --green-dark: #3cb094;
+            --dark: #121212; --dark-card: #1e1e1e;
+        }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--dark); color: white; overflow-x: hidden; }
+        
+        /* --- HEADER / NAVBAR (Identique à l'accueil) --- */
+        .navbar { background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); border-bottom: 2px solid var(--blue); padding: 10px 0; }
+        .nav-link { color: white !important; font-weight: bold; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; }
+        .nav-link:hover, .nav-link.active { color: var(--green-light) !important; text-shadow: 0 0 10px rgba(138, 180, 50, 0.5); }
+        .navbar-brand img { transition: transform 0.3s ease; }
+        .navbar-brand:hover img { transform: rotate(-5deg); }
+
+        /* --- HERO SECTION DE LA PAGE --- */
+        .page-hero {
+            padding: 120px 0 60px 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(20,20,20,0.8) 100%);
+            border-bottom: 2px solid rgba(255,255,255,0.05);
+        }
+        .page-hero h1 { font-size: 3.5rem; font-weight: 900; text-transform: uppercase; margin-bottom: 10px; color: white; }
+        .page-hero h1 span { color: var(--blue); text-shadow: 2px 2px 0 var(--red); }
+        .page-hero p { color: #aaa; font-size: 1.1rem; }
+
+        /* --- STYLES SPÉCIFIQUES À LA PAGE ÉQUIPE --- */
+        .section-title { font-weight: 900; text-transform: uppercase; color: white; margin-bottom: 40px; }
+        
+        /* Style pour les catégories (U17, Staff, etc.) */
+        .team-category {
+            display: inline-block; padding: 10px 20px; border-radius: 30px;
+            font-weight: bold; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px;
+            background: rgba(255,255,255,0.05); color: white; margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* --- CARTE DE MEMBRE (COUREUR & STAFF) CORRIGÉE --- */
+        .team-card-container { margin-bottom: 40px; } /* Augmenté pour un peu plus de respiration */
+        
+        .team-card {
+            position: relative; overflow: hidden; border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            background-color: var(--dark-card); transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            width: 100%; /* S'adapte à la colonne Bootstrap */
+            /* Suppression du aspect-ratio carré qui coupait les têtes */
+        }
+        .team-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0, 172, 218, 0.2); }
+
+        /* Conteneur d'image CORRIGÉ */
+        .team-image-wrapper { 
+            position: relative; 
+            overflow: hidden; 
+            /* Fixer une hauteur proportionnelle à la largeur pour forcer un format portrait */
+            padding-bottom: 125%; /* Rapport 4:5 (par exemple, 200px de large -> 250px de haut) */
+            background-color: #000; /* Fond noir si l'image ne charge pas */
+        }
+        
+        /* Image CORRIGÉE */
+        .team-image { 
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%; 
+            object-fit: cover; /* Remplit sans déformer, en se basant sur le conteneur */
+            object-position: center top; /* Priorité au haut de l'image (les têtes) si coupure il y a */
+            transition: transform 0.6s ease; 
+        }
+        .team-card:hover .team-image { transform: scale(1.1) rotate(1deg); }
+
+        /* L'Overlay au survol */
+        .team-overlay {
+            position: absolute; bottom: 0; left: 0; right: 0; height: 100%;
+            background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,172,218,0.8) 60%, rgba(60,176,148,1) 100%);
+            opacity: 0; transition: opacity 0.4s ease;
+            display: flex; flex-direction: column; justify-content: flex-end; padding: 20px;
+        }
+        .team-card:hover .team-overlay { opacity: 1; }
+
+        /* Informations sur l'overlay */
+        .team-overlay h4 { font-weight: 900; text-transform: uppercase; font-size: 1.2rem; color: white; margin-bottom: 5px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
+        .team-overlay p { color: rgba(255,255,255,0.8); font-size: 0.9rem; margin-bottom: 0; }
+        .staff-role { font-weight: bold; text-transform: uppercase; color: white; font-size: 0.8rem; letter-spacing: 1px; }
+
+        /* --- FOOTER (Identique à l'accueil) --- */
+        footer { border-top: 2px solid var(--green-dark); padding: 50px 0; background: #080808; margin-top: 60px;}
+        .social-icon { font-size: 24px; margin: 0 15px; color: var(--blue); transition: 0.3s ease; text-decoration: none; display: inline-block;}
+        .social-icon:hover { color: var(--red); transform: scale(1.2); }
+        .footer-logo { transition: filter 0.3s ease; }
+        .footer-logo:hover { filter: drop-shadow(0 0 10px var(--green-dark)); }
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="Logo_OVTT.png" height="60" alt="Logo Objectif VTT Lillebonne" class="d-inline-block align-text-top">
+            </a>
+            <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="equipe.html">L'Équipe</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Actualités</a></li>
+                    <li class="nav-item"><a class="nav-link" href="partenaires.html">Partenaires</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-hero text-center" data-aos="fade-down">
+        <div class="container">
+            <h1>L'<span>Équipe</span></h1>
+            <p>Découvrez les visages qui portent les couleurs du Team Division Nationale d'Objectif VTT Lillebonne.</p>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-title">Les Coureurs</h2>
+                <div class="team-category" style="border: 2px solid var(--blue); color: var(--blue);">Effectif DN</div>
+            </div>
+
+            <div class="row">
+                
+                <div class="col-6 col-md-4 col-lg-3 team-card-container" data-aos="fade-up" data-aos-delay="100">
+                    <div class="team-card">
+                        <div class="team-image-wrapper">
+                            <img src="Maxence.png" alt="Maxence Thorel" class="team-image">
+                        </div>
+                        <div class="team-overlay">
+                            <h4>Maxence Thorel</h4>
+                            <p>U17</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 team-card-container" data-aos="fade-up" data-aos-delay="200">
+                    <div class="team-card">
+                        <div class="team-image-wrapper">
+                            <img src="Gabin.png" alt="Gabin Hamel" class="team-image">
+                        </div>
+                        <div class="team-overlay">
+                            <h4>Gabin Hamel</h4>
+                            <p>U17</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 team-card-container" data-aos="fade-up" data-aos-delay="300">
+                    <div class="team-card">
+                        <div class="team-image-wrapper">
+                            <img src="Louis.png" alt="Louis Goulard" class="team-image">
+                        </div>
+                        <div class="team-overlay">
+                            <h4>Louis Goulard</h4>
+                            <p>U19</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 team-card-container" data-aos="fade-up" data-aos-delay="400">
+                    <div class="team-card">
+                        <div class="team-image-wrapper">
+                            <img src="Antonin.png" alt="Antonin Thorel" class="team-image">
+                        </div>
+                        <div class="team-overlay">
+                            <h4>Antonin Thorel</h4>
+                            <p>U19</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 team-card-container" data-aos="fade-up" data-aos-delay="500">
+                    <div class="team-card">
+                        <div class="team-image-wrapper">
+                            <img src="Léo.png" alt="Léo Auvray" class="team-image">
+                        </div>
+                        <div class="team-overlay">
+                            <h4>Léo Auvray</h4>
+                            <p>U23</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 team-card-container" data-aos="fade-up" data-aos-delay="600">
+                    <div class="team-card">
+                        <div class="team-image-wrapper">
+                            <img src="Alexandre.png" alt="Alexandre Lavaud" class="team-image">
+                        </div>
+                        <div class="team-overlay">
+                            <h4>Alexandre Lavaud</h4>
+                            <p>Master</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 team-card-container" data-aos="fade-up" data-aos-delay="700">
+                    <div class="team-card">
+                        <div class="team-image-wrapper">
+                            <img src="Sylvain.png" alt="Sylvain Goulard" class="team-image">
+                        </div>
+                        <div class="team-overlay">
+                            <h4>Sylvain Goulard</h4>
+                            <p>Master</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-dark">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-title">Le Staff</h2>
+                <div class="team-category" style="border: 2px solid var(--red); color: var(--red);">Soutien Technique</div>
+            </div>
+
+            <div class="row justify-content-center">
+
+                <div class="col-6 col-md-4 col-lg-3 team-card-container" data-aos="fade-up" data-aos-delay="100">
+                    <div class="team-card">
+                        <div class="team-image-wrapper">
+                            <img src="Pascal. T.png" alt="Pascal Thorel" class="team-image">
+                        </div>
+                        <div class="team-overlay" style="background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(255,0,0,0.8) 60%, rgba(138,180,50,1) 100%);">
+                            <h4>Pascal Thorel</h4>
+                            <p class="staff-role">Team Manager</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 team-card-container" data-aos="fade-up" data-aos-delay="200">
+                    <div class="team-card">
+                        <div class="team-image-wrapper">
+                            <img src="Stéphane.png" alt="Stéphane Auvray" class="team-image">
+                        </div>
+                        <div class="team-overlay" style="background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(255,0,0,0.8) 60%, rgba(138,180,50,1) 100%);">
+                            <h4>Stéphane Auvray</h4>
+                            <p class="staff-role">Membre du Staff</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 team-card-container" data-aos="fade-up" data-aos-delay="300">
+                    <div class="team-card">
+                        <div class="team-image-wrapper">
+                            <img src="Pascal. D.png" alt="Pascal Daens" class="team-image">
+                        </div>
+                        <div class="team-overlay" style="background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(255,0,0,0.8) 60%, rgba(138,180,50,1) 100%);">
+                            <h4>Pascal Daens</h4>
+                            <p class="staff-role">Référent Technique</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container text-center">
+            <a href="index.html">
+                <img src="Logo_OVTT.png" height="50" alt="OVTT" class="mb-4 footer-logo">
+            </a>
+            <div class="mb-4">
+                <a href="#" target="_blank" class="social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank" class="social-icon" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" target="_blank" class="social-icon" title="Strava"><i class="fab fa-strava"></i></a>
+            </div>
+            <p class="small text-muted">&copy; 2026 Objectif VTT Lillebonne. Design Ultra-Moderne pour Team DN.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialisation de la bibliothèque d'animation AOS
+        AOS.init({
+            duration: 1000, // Durée de l'animation
+            once: true,      // N'anime qu'une seule fois au scroll
+            easing: 'ease-out-quad', // Type d'assouplissement
+        });
+    </script>
+</body>
+</html>
