@@ -225,7 +225,19 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>AOS.init({ duration: 1000, once: true });</script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+    var swiper = new Swiper(".mySwiper", {
+        loop: true,
+        pagination: { el: ".swiper-pagination", clickable: true },
+        navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+        autoplay: { delay: 4000, disableOnInteraction: false },
+        effect: 'fade', // Optionnel : tu peux mettre 'slide', 'fade', ou 'coverflow'
+        fadeEffect: { crossFade: true }
+    });
+</script>
 </body>
 
 
 </html>
+
