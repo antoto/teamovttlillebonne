@@ -1,47 +1,229 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BLOG | Team DN</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-<style>
-    .blog-container { padding: 120px 10% 50px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-    .post-card { 
-        background: #1e1e1e; border-radius: 15px; overflow: hidden; 
-        border-left: 5px solid var(--blue); transition: 0.4s;
-    }
-    .post-card:hover { transform: translateY(-10px); border-left-color: var(--red); }
-    .post-content { padding: 20px; }
-    .tag { background: var(--green-dark); padding: 5px 10px; font-size: 0.7rem; border-radius: 5px; }
-    .post-title { margin-top: 15px; color: var(--blue); }
-</style>
-<header>
-    <div class="logo"><img src="Logo_OVTT.jpg" alt="Logo"></div>
-    <nav>
-        <a href="index.html">Accueil</a>
-        <a href="equipe.html">L'Équipe</a>
-        <a href="blog.html">Actualités</a>
-        <a href="a-propos.html">À Propos</a>
-    </nav>
-</header>
+    <title>Actualités - Objectif VTT Lillebonne</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
-<div class="blog-container">
-    <div class="post-card" data-aos="fade-right">
-        <div class="post-content">
-            <span class="tag">Résultat Compétition</span>
-            <h3 class="post-title">Podium à la Coupe de France</h3>
-            <p>Une performance exceptionnelle de nos coureurs ce weekend...</p>
-            <br><small>01 Mars 2024</small>
+    <style>
+        :root {
+            --blue: #00acda;
+            --red: #ff0000;
+            --green-light: #8ab432;
+            --green-dark: #3cb094;
+            --dark: #0a0a0a;
+            --card-bg: #161616;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--blue);
+        }
+
+        .nav-link {
+            color: white !important;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--green-light) !important;
+        }
+
+        /* Header Blog */
+        .blog-header {
+            padding: 120px 0 60px;
+            background: linear-gradient(45deg, rgba(0, 0, 0, 0.9), rgba(0, 172, 218, 0.1));
+            text-align: center;
+        }
+
+        .blog-header h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+        }
+
+        .blog-header h1 span {
+            color: var(--blue);
+        }
+
+        /* Articles */
+        .post-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: 0.4s;
+            margin-bottom: 50px;
+        }
+
+        .post-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--green-light);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .post-img {
+            width: 100%;
+            height: 500px;
+            /* Format large pour vos photos de course */
+            object-fit: cover;
+        }
+
+        .post-content {
+            padding: 40px;
+        }
+
+        .post-date {
+            color: var(--blue);
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+        }
+
+        .post-title {
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin: 15px 0;
+            line-height: 1.2;
+        }
+
+        .post-text {
+            color: #ccc;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        /* Résultats List */
+        .res-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-left: 4px solid var(--green-light);
+            margin-bottom: 10px;
+            border-radius: 0 10px 10px 0;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 50px 0;
+            background: #050505;
+        }
+
+        .social-icon {
+            font-size: 20px;
+            margin: 0 15px;
+            color: var(--blue);
+            transition: 0.3s;
+        }
+
+        .social-icon:hover {
+            color: var(--red);
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><img src="Logo_OVTT.png" height="60"></a>
+            <div class="collapse navbar-collapse justify-content-end">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="equipe.html">L'Équipe</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="blog.html">Actualités</a></li>
+                    <li class="nav-item"><a class="nav-link" href="partenaires.html">Partenaires</a></li>
+                </ul>
+            </div>
         </div>
-    </div>
-    </div>
+    </nav>
+
+    <header class="blog-header">
+        <div class="container" data-aos="fade-down">
+            <h1>ACTUALITÉS & <span>RÉSULTATS</span></h1>
+            <p class="text-muted">Suivez l'aventure du Team DN au cœur des compétitions.</p>
+        </div>
+    </header>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+
+                    <article class="post-card" data-aos="fade-up">
+                        <div class="swiper mySwiper">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide"><img src="photo-gueret-1.jpg" class="post-img"></div>
+                                <div class="swiper-slide"><img src="photo-gueret-2.jpg" class="post-img"></div>
+                                <div class="swiper-slide"><img src="photo-gueret-3.jpg" class="post-img"></div>
+                            </div>
+                            <div class="swiper-button-next" style="color: var(--blue)"></div>
+                            <div class="swiper-button-prev" style="color: var(--blue)"></div>
+                            <div class="swiper-pagination"></div>
+                        </div>
+
+                        <div class="post-content">
+                            <span class="post-date">Mars 2026 • Compétition</span>
+                            <h2 class="post-title">PREMIÈRE VICTOIRE DE LA SAISON ! 🏆</h2>
+
+                            <p class="post-text">
+                                L'équipe lançait officiellement sa saison ce week-end à Guéret pour la
+                                <strong>Chabrières VTT</strong>.
+                                Un premier déplacement qui annonce la couleur !
+                            </p>
+
+                            <div class="my-4">
+                                <div class="res-item"><strong>Alexandre Lavaud :</strong> 1ère place en Master ! 🥇
+                                </div>
+                                <div class="res-item"><strong>Léo Auvray :</strong> 29ème place en U23. 🦾</div>
+                            </div>
+
+                            <p class="post-text">
+                                Un immense merci à <strong>Stéphane</strong> pour l’intendance et la gestion parfaite
+                                des zones techniques. 🛠️🍼
+                            </p>
+
+                            <hr style="border-color: rgba(255,255,255,0.1);">
+                            <p class="small text-muted">📸 Crédits : Arthur Pouchet & Camille Faure</p>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </div>
+    </section>
 
     <footer>
-        <div class="social-dots">
-            <span class="dot" style="background:var(--blue)"></span>
-            <span class="dot" style="background:var(--red)"></span>
-            <span class="dot" style="background:var(--green-light)"></span>
+        <div class="container text-center">
+            <img src="Logo_OVTT.png" height="40" class="mb-4">
+            <div class="mb-4">
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-strava"></i></a>
+            </div>
+            <p class="small text-muted">&copy; 2026 Objectif VTT Lillebonne - Team DN</p>
         </div>
-        <p>&copy; 2024 OBJECTIF VTT LILLEBONNE - Design DN</p>
     </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init({ duration: 1000, once: true });</script>
+</body>
+
+</html>
