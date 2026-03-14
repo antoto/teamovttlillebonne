@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendrier 2026 - Objectif VTT Lillebonne</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --blue: #00acda; --red: #ff0000; --green-light: #8ab432; --green-dark: #3cb094;
+            --dark: #121212;
+        }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--dark); color: white; }
+
+        .navbar { background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); border-bottom: 2px solid var(--blue); }
+        .nav-link { color: white !important; font-weight: bold; text-transform: uppercase; font-size: 0.9rem; }
+        /* Surbrillance verte pour la page active */
+        .nav-link:hover, .nav-link.active { color: var(--green-light) !important; }
+
+        .hero-cal { padding: 100px 0 50px; text-align: center; }
+        .hero-cal h1 { font-weight: 900; text-transform: uppercase; margin-bottom: 20px; }
+        
+        .cal-card {
+            background: #1e1e1e;
+            border-left: 5px solid var(--blue);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 0 15px 15px 0;
+            transition: 0.3s;
+        }
+        .cal-card:hover { transform: translateX(10px); background: #252525; }
+        .date-badge { color: var(--green-light); font-weight: bold; }
+        .btn-ffc { background: var(--blue); color: white; font-weight: bold; border-radius: 20px; padding: 5px 15px; font-size: 0.8rem; text-decoration: none; }
+        .btn-ffc:hover { background: var(--green-dark); color: white; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><img src="Logo_OVTT.png" height="50"></a>
+            <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav text-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="equipe.html">L'Équipe</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Actualités</a></li>
+                    <li class="nav-item"><a class="nav-link" href="calendrier.html">Calendrier</a></li>
+                    <li class="nav-item"><a class="nav-link" href="partenaires.html">Partenaires</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-cal">
+        <div class="container" data-aos="fade-down">
+            <h1>Saison <span style="color:var(--blue)">2026</span></h1>
+            <p style="color: white;">Le calendrier des objectifs majeurs</p>
+        </div>
+    </section>
+
+    <section class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                
+                <div class="cal-card" data-aos="fade-right">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="date-badge">27 - 29 Mars 2026</div>
+                            <h3 class="h5 mb-0">Coupe de France #1 - Pernes-Les-Fontaines</h3>
+                        </div>
+                        <a href="#" class="btn-ffc">FFC →</a>
+                    </div>
+                </div>
+
+                <div class="cal-card" data-aos="fade-right" data-aos-delay="100">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="date-badge">17 - 19 Avril 2026</div>
+                            <h3 class="h5 mb-0">Coupe de France #2 - Guéret</h3>
+                        </div>
+                        <a href="#" class="btn-ffc">FFC →</a>
+                    </div>
+                </div>
+
+                <div class="cal-card" data-aos="fade-right" data-aos-delay="200">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="date-badge">29 - 31 Mai 2026</div>
+                            <h3 class="h5 mb-0">Coupe de France #3 - Élancourt</h3>
+                        </div>
+                        <a href="#" class="btn-ffc">FFC →</a>
+                    </div>
+                </div>
+
+                <div class="cal-card" data-aos="fade-right" data-aos-delay="300">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="date-badge">03 - 05 Juillet 2026</div>
+                            <h3 class="h5 mb-0">MB Race - Megève</h3>
+                        </div>
+                        <a href="#" class="btn-ffc">FFC →</a>
+                    </div>
+                </div>
+
+                <div class="cal-card" style="border-left-color: var(--red);" data-aos="fade-right" data-aos-delay="400">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="date-badge" style="color: var(--red);">17 - 19 Juillet 2026</div>
+                            <h3 class="h5 mb-0">Championnat de France - Super Dévoluy</h3>
+                        </div>
+                        <a href="#" class="btn-ffc">FFC →</a>
+                    </div>
+                </div>
+
+                <div class="cal-card" data-aos="fade-right" data-aos-delay="500">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="date-badge">24 - 26 Juillet 2026</div>
+                            <h3 class="h5 mb-0">Coupe de France #4 - Puy Saint Vincent</h3>
+                        </div>
+                        <a href="#" class="btn-ffc">FFC →</a>
+                    </div>
+                </div>
+
+                <div class="cal-card" data-aos="fade-right" data-aos-delay="600">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="date-badge">11 - 13 Septembre 2026</div>
+                            <h3 class="h5 mb-0">Coupe de France #5 - Brouains</h3>
+                        </div>
+                        <a href="#" class="btn-ffc">FFC →</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container text-center">
+            <a href="index.html"><img src="Logo_OVTT.png" height="50" alt="OVTT" class="mb-4"></a>
+            <div class="mb-4">
+                <a href="https://www.instagram.com/teamovttlillebonne/?__pwa=1" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=100057587674176" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+            </div>
+            <p class="small text-muted">&copy; 2026 Objectif VTT Lillebonne.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init({ duration: 800, once: true });</script>
+</body>
+</html>
